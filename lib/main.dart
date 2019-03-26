@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-void main() => runApp(App());
+main() => runApp(App());
 
 var notifications = FlutterLocalNotificationsPlugin();
 
 class App extends StatelessWidget {
   @override
-  Widget build(BuildContext context) {
+  build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Smiley',
@@ -21,25 +22,45 @@ class App extends StatelessWidget {
 
 class Page extends StatefulWidget {
   @override
-  _PageState createState() => _PageState();
+  createState() => _PageState();
 }
 
 class _PageState extends State<Page> {
-  var _notificationCount = 3.0;
+  final tagIsEnabled = 'isEnabled';
+  final tagNotificationCount = 'notificationCount';
+  var _prefs;
+  var _isEnabled;
+  var _notificationCount;
 
-  void _setNotificationCount(double value) =>
-      setState(() => _notificationCount = value);
+  _toggleEnabled() {
+    _prefs.setBool(tagIsEnabled, !_isEnabled);
+    setState(() => _isEnabled = !_isEnabled);
+  }
+
+  _setNotificationCount(double value) {
+    _prefs.setDouble(tagNotificationCount, value);
+    setState(() => _notificationCount = value);
+  }
 
   @override
-  void initState() {
+  initState() {
     var settingsAndroid = AndroidInitializationSettings('launch_background');
     var settingsIOS = IOSInitializationSettings();
     var settings = InitializationSettings(settingsAndroid, settingsIOS);
     notifications.initialize(settings);
+    _initPrefs();
+  }
+
+  _initPrefs() async {
+    _prefs = await SharedPreferences.getInstance();
+    setState(() {
+      _isEnabled = _prefs.getBool(tagIsEnabled) ?? false;
+      _notificationCount = _prefs.getDouble(tagNotificationCount) ?? 3.0;
+    });
   }
 
   @override
-  Widget build(BuildContext context) {
+  build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('Smiley')),
       body: Center(
@@ -53,27 +74,41 @@ class _PageState extends State<Page> {
     );
   }
 
-  IconButton _getSmileButton() {
-    return IconButton(
-      icon: Icon(Icons.notifications),
-      onPressed: _showNotification,
-    );
-  }
+  _getSmileButton() => IconButton(
+        icon: Icon(Icons.notifications),
+        onPressed: _setupNotifications,
+      );
 
-  Slider _getCountSlider() => Slider(
+  _getCountSlider() => Slider(
         value: _notificationCount,
         min: 1,
         max: 5,
         divisions: 4,
         label: '${_notificationCount.round()}',
-        onChanged: _setNotificationCount,
+        onChanged: _isEnabled ? null : _setNotificationCount,
       );
 
-  Future _showNotification() async {
-    var androidChannel = AndroidNotificationDetails('Smiley', 'Smiley', 'Smiley',
+  _setupNotifications() async {
+    _toggleEnabled();
+    if (_isEnabled) {
+      _enableNotifications();
+    } else {
+      _disableNotifications();
+    }
+  }
+
+  _enableNotifications() async {
+    var time = DateTime.now().add(Duration(seconds: 5));
+    var androidChannel = AndroidNotificationDetails(
+        'Smiley', 'Smiley', 'Smiley',
         importance: Importance.Max, priority: Priority.High);
     var iOSChannel = IOSNotificationDetails();
     var channel = NotificationDetails(androidChannel, iOSChannel);
-    await notifications.show(0, 'Smile', 'Smile to person near you! \u{1f642}', channel);
+    await notifications.schedule(
+        0, 'Smile', 'Smile to person near you! \u{1f642}', time, channel);
+  }
+
+  _disableNotifications() async {
+    await notifications.cancelAll();
   }
 }
