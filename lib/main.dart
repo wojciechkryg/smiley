@@ -86,8 +86,8 @@ class _PageState extends State<Page> {
   _getCountSlider() => Slider(
         value: _notificationCount,
         min: 1,
-        max: 5,
-        divisions: 4,
+        max: 10,
+        divisions: 9,
         label: '${_notificationCount.round()}',
         onChanged: _isEnabled ? null : _setNotificationCount,
       );
