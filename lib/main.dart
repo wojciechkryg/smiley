@@ -1,6 +1,8 @@
+import 'dart:convert';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -109,10 +111,20 @@ class _PageState extends State<Page> {
     }
   }
 
-  _scheduleNotification(int id, NotificationDetails channel) {
-    notifications.showDailyAtTime(id, 'Smile',
-        'Smile to person near you! \u{1f642}', _getRandomTime(), channel);
+  _scheduleNotification(int id, NotificationDetails channel) async {
+    final title = await _getRandomDataFromFile('assets/data/titles.json');
+    final body = await _getRandomDataFromFile('assets/data/bodies.json');
+    notifications.showDailyAtTime(id, title, body, _getRandomTime(), channel);
   }
+
+  _getRandomDataFromFile(String path) async => (await _getJsonAsset(path)
+        ..shuffle())
+      .first
+      .values
+      .first;
+
+  _getJsonAsset(String path) async =>
+      await rootBundle.loadString(path).then((json) => jsonDecode(json));
 
   _getRandomTime() {
     final random = Random();
