@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -91,24 +93,35 @@ class _PageState extends State<Page> {
   _setupNotifications() async {
     _toggleEnabled();
     if (_isEnabled) {
-      _enableNotifications();
+      _scheduleNotifications();
     } else {
-      _disableNotifications();
+      _cancelAllNotifications();
     }
   }
 
-  _enableNotifications() async {
-    var time = DateTime.now().add(Duration(seconds: 5));
-    var androidChannel = AndroidNotificationDetails(
-        'Smiley', 'Smiley', 'Smiley',
-        importance: Importance.Max, priority: Priority.High);
+  _scheduleNotifications() {
+    var androidChannel =
+        AndroidNotificationDetails('Smiley', 'Smiley', 'Smiley');
     var iOSChannel = IOSNotificationDetails();
     var channel = NotificationDetails(androidChannel, iOSChannel);
-    await notifications.schedule(
-        0, 'Smile', 'Smile to person near you! \u{1f642}', time, channel);
+    for (var i = 0; i < _notificationCount; i++) {
+      _scheduleNotification(i, channel);
+    }
   }
 
-  _disableNotifications() async {
-    await notifications.cancelAll();
+  _scheduleNotification(int id, NotificationDetails channel) {
+    notifications.showDailyAtTime(id, 'Smile',
+        'Smile to person near you! \u{1f642}', _getRandomTime(), channel);
+  }
+
+  _getRandomTime() {
+    final random = Random();
+    final hour = 7 + random.nextInt(15);
+    final minute = random.nextInt(60);
+    Time(hour, minute, 0);
+  }
+
+  _cancelAllNotifications() {
+    notifications.cancelAll();
   }
 }
