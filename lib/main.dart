@@ -128,7 +128,7 @@ class _PageState extends State<Page> {
 
   _getRandomTime() {
     final random = Random();
-    final hour = 7 + random.nextInt(15);
+    final hour = 7 + random.nextInt(14);
     final minute = random.nextInt(60);
     final second = random.nextInt(60);
     return Time(hour, minute, second);
