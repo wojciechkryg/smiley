@@ -50,7 +50,7 @@ class _PageState extends State<Page> {
   @override
   initState() {
     super.initState();
-    var settingsAndroid = AndroidInitializationSettings('launch_background');
+    var settingsAndroid = AndroidInitializationSettings('ic_notification');
     var settingsIOS = IOSInitializationSettings();
     var settings = InitializationSettings(settingsAndroid, settingsIOS);
     notifications.initialize(settings);
