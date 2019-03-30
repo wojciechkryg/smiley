@@ -10,7 +10,7 @@
 
     <application
         android:name="io.flutter.app.FlutterApplication"
-        android:label="smiley"
+        android:label="Smiley"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
