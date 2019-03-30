@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:math';
 
+import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -67,20 +68,29 @@ class _PageState extends State<Page> {
   build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('Smiley')),
-      body: Center(
-        child: Column(
-          children: [
-            _getSmileButton(),
-            _getCountSlider(),
-          ],
-        ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          _getSmileButton(),
+          _getCountSlider(),
+        ],
       ),
     );
   }
 
-  _getSmileButton() => IconButton(
-        icon: Icon(Icons.notifications),
-        onPressed: _setupNotifications,
+  _getSmileButton() => Container(
+        height: 320,
+        width: 320,
+        child: RaisedButton(
+          color: Colors.amberAccent,
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(160)),
+          child: FlareActor(
+            'assets/animation/Smile.flr',
+            animation: _isEnabled ? "On" : "Off",
+          ),
+          onPressed: _setupNotifications,
+        ),
       );
 
   _getCountSlider() => Slider(
@@ -102,8 +112,9 @@ class _PageState extends State<Page> {
   }
 
   _scheduleNotifications() {
-    var androidChannel =
-        AndroidNotificationDetails('Smiley', 'Smiley', 'Smiley');
+    var androidChannel = AndroidNotificationDetails(
+        'Smiley', 'Smiley', 'Smiley',
+        importance: Importance.Max, priority: Priority.Max);
     var iOSChannel = IOSNotificationDetails();
     var channel = NotificationDetails(androidChannel, iOSChannel);
     for (var i = 0; i < _notificationCount; i++) {
