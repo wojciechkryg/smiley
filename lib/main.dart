@@ -18,7 +18,7 @@ class App extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Smiley',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.amber,
       ),
       home: Page(),
     );
@@ -49,6 +49,7 @@ class _PageState extends State<Page> {
 
   @override
   initState() {
+    super.initState();
     var settingsAndroid = AndroidInitializationSettings('launch_background');
     var settingsIOS = IOSInitializationSettings();
     var settings = InitializationSettings(settingsAndroid, settingsIOS);
@@ -68,12 +69,16 @@ class _PageState extends State<Page> {
   build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('Smiley')),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          _getSmileButton(),
-          _getCountSlider(),
-        ],
+      backgroundColor: Colors.amber[100],
+      body: Container(
+        padding: EdgeInsets.all(16),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            _getSmileButton(),
+            _getCountSlider(),
+          ],
+        ),
       ),
     );
   }
@@ -98,6 +103,8 @@ class _PageState extends State<Page> {
         min: 1,
         max: 10,
         divisions: 9,
+        activeColor: Colors.amber,
+        inactiveColor: Colors.amber[50],
         label: '${_notificationCount.round()}',
         onChanged: _isEnabled ? null : _setNotificationCount,
       );
