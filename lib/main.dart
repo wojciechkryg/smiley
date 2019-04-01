@@ -13,16 +13,15 @@ var notifications = FlutterLocalNotificationsPlugin();
 
 class App extends StatelessWidget {
   @override
-  build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Smiley',
-      theme: ThemeData(
-        primarySwatch: Colors.amber,
-      ),
-      home: Page(),
-    );
-  }
+  build(BuildContext context) => MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Smiley',
+        theme: ThemeData(
+          accentTextTheme:
+              TextTheme(body2: TextStyle(color: Colors.amberAccent)),
+        ),
+        home: Page(),
+      );
 }
 
 class Page extends StatefulWidget {
@@ -68,14 +67,23 @@ class _PageState extends State<Page> {
   @override
   build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Smiley')),
-      backgroundColor: Colors.amber[100],
+      appBar: AppBar(
+        backgroundColor: Colors.amberAccent,
+        title: Text(
+          'Smiley',
+          style: TextStyle(
+              color: Colors.black, fontFamily: 'Pacifico', fontSize: 24),
+        ),
+        elevation: 0,
+      ),
+      backgroundColor: Colors.amberAccent,
       body: Container(
         padding: EdgeInsets.all(16),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             _getSmileButton(),
+            _getHint(),
             _getCountSlider(),
           ],
         ),
@@ -87,6 +95,8 @@ class _PageState extends State<Page> {
         height: 320,
         width: 320,
         child: RaisedButton(
+          highlightElevation: 0,
+          elevation: 0,
           color: Colors.amberAccent,
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(160)),
@@ -98,13 +108,17 @@ class _PageState extends State<Page> {
         ),
       );
 
+  _getHint() => Text(
+      _isEnabled ? "Tap face to disable." : "Tap face to enable.",
+      style:
+          TextStyle(color: Colors.black, fontFamily: 'Pacifico', fontSize: 20));
+
   _getCountSlider() => Slider(
         value: _notificationCount,
         min: 1,
         max: 10,
         divisions: 9,
-        activeColor: Colors.amber,
-        inactiveColor: Colors.amber[50],
+        activeColor: Colors.black,
         label: '${_notificationCount.round()}',
         onChanged: _isEnabled ? null : _setNotificationCount,
       );
@@ -120,7 +134,7 @@ class _PageState extends State<Page> {
 
   _scheduleNotifications() {
     var androidChannel = AndroidNotificationDetails(
-        'Smiley', 'Smiley', 'Smiley',
+        'Smiley', 'Smiley', 'Smiley notifications',
         importance: Importance.Max, priority: Priority.Max);
     var iOSChannel = IOSNotificationDetails();
     var channel = NotificationDetails(androidChannel, iOSChannel);
