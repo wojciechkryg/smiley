@@ -3,13 +3,14 @@ import 'dart:math';
 
 import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart' show rootBundle;
+import 'package:flutter/services.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-main() => runApp(App());
-
-var notifications = FlutterLocalNotificationsPlugin();
+main() {
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+  runApp(App());
+}
 
 class App extends StatelessWidget {
   @override
@@ -17,21 +18,21 @@ class App extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Smiley',
         theme: ThemeData(
-          accentTextTheme:
-              TextTheme(body2: TextStyle(color: Colors.amberAccent)),
-        ),
-        home: Page(),
+            accentTextTheme:
+                TextTheme(body2: TextStyle(color: Colors.amberAccent))),
+        home: Main(),
       );
 }
 
-class Page extends StatefulWidget {
+class Main extends StatefulWidget {
   @override
-  createState() => _PageState();
+  createState() => _MainState();
 }
 
-class _PageState extends State<Page> {
+class _MainState extends State<Main> {
   final tagIsEnabled = 'isEnabled';
   final tagNotificationCount = 'notificationCount';
+  var notifications = FlutterLocalNotificationsPlugin();
   var _prefs;
   var _isEnabled;
   var _notificationCount;
@@ -65,31 +66,30 @@ class _PageState extends State<Page> {
   }
 
   @override
-  build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
+  build(BuildContext context) => Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.amberAccent,
+          title: Text(
+            'Smiley',
+            style: TextStyle(
+                color: Colors.black, fontFamily: 'Pacifico', fontSize: 24),
+          ),
+          elevation: 0,
+        ),
         backgroundColor: Colors.amberAccent,
-        title: Text(
-          'Smiley',
-          style: TextStyle(
-              color: Colors.black, fontFamily: 'Pacifico', fontSize: 24),
+        body: Container(
+          padding: EdgeInsets.all(16),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              _getHintLabel(),
+              _getSmileButton(),
+              _getCountSliderLabel(),
+              _getCountSlider(),
+            ],
+          ),
         ),
-        elevation: 0,
-      ),
-      backgroundColor: Colors.amberAccent,
-      body: Container(
-        padding: EdgeInsets.all(16),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            _getSmileButton(),
-            _getHint(),
-            _getCountSlider(),
-          ],
-        ),
-      ),
-    );
-  }
+      );
 
   _getSmileButton() => Container(
         height: 320,
@@ -108,10 +108,14 @@ class _PageState extends State<Page> {
         ),
       );
 
-  _getHint() => Text(
-      _isEnabled ? "Tap face to disable." : "Tap face to enable.",
+  _getHintLabel() => Text(
+      _isEnabled ? "Tap face to disable" : "Tap face to enable",
       style:
           TextStyle(color: Colors.black, fontFamily: 'Pacifico', fontSize: 20));
+
+  _getCountSliderLabel() => Text("Notifcations per day",
+      style:
+          TextStyle(color: Colors.black, fontFamily: 'Pacifico', fontSize: 16));
 
   _getCountSlider() => Slider(
         value: _notificationCount,
@@ -134,7 +138,7 @@ class _PageState extends State<Page> {
 
   _scheduleNotifications() {
     var androidChannel = AndroidNotificationDetails(
-        'Smiley', 'Smiley', 'Smiley notifications',
+        'Smiley', 'Smiley', 'Smiley',
         importance: Importance.Max, priority: Priority.Max);
     var iOSChannel = IOSNotificationDetails();
     var channel = NotificationDetails(androidChannel, iOSChannel);
@@ -144,8 +148,8 @@ class _PageState extends State<Page> {
   }
 
   _scheduleNotification(int id, NotificationDetails channel) async {
-    final title = await _getRandomDataFromFile('assets/data/titles.json');
-    final body = await _getRandomDataFromFile('assets/data/bodies.json');
+    var title = await _getRandomDataFromFile('assets/data/titles.json');
+    var body = await _getRandomDataFromFile('assets/data/bodies.json');
     notifications.showDailyAtTime(id, title, body, _getRandomTime(), channel);
   }
 
@@ -159,10 +163,10 @@ class _PageState extends State<Page> {
       await rootBundle.loadString(path).then((json) => jsonDecode(json));
 
   _getRandomTime() {
-    final random = Random();
-    final hour = 7 + random.nextInt(14);
-    final minute = random.nextInt(60);
-    final second = random.nextInt(60);
+    var random = Random();
+    var hour = 7 + random.nextInt(14);
+    var minute = random.nextInt(60);
+    var second = random.nextInt(60);
     return Time(hour, minute, second);
   }
 
