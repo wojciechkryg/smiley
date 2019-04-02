@@ -12,14 +12,16 @@ main() {
   runApp(App());
 }
 
+final mainColor = Colors.amberAccent;
+final sideColor = Colors.black;
+
 class App extends StatelessWidget {
   @override
   build(BuildContext context) => MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Smiley',
         theme: ThemeData(
-            accentTextTheme:
-                TextTheme(body2: TextStyle(color: Colors.amberAccent))),
+            accentTextTheme: TextTheme(body2: TextStyle(color: mainColor))),
         home: Main(),
       );
 }
@@ -68,28 +70,32 @@ class _MainState extends State<Main> {
   @override
   build(BuildContext context) => Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.amberAccent,
+          backgroundColor: mainColor,
+          elevation: 0,
           title: Text(
             'Smiley',
             style: TextStyle(
-                color: Colors.black, fontFamily: 'Pacifico', fontSize: 24),
-          ),
-          elevation: 0,
-        ),
-        backgroundColor: Colors.amberAccent,
-        body: Container(
-          padding: EdgeInsets.all(16),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              _getHintLabel(),
-              _getSmileButton(),
-              _getCountSliderLabel(),
-              _getCountSlider(),
-            ],
+                color: sideColor, fontFamily: 'Pacifico', fontSize: 24),
           ),
         ),
+        backgroundColor: mainColor,
+        body: _getMainContainer(),
       );
+
+  Container _getMainContainer() {
+    return Container(
+      padding: EdgeInsets.all(16),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          _getHintLabel(),
+          _getSmileButton(),
+          _getCountSliderLabel(),
+          _getCountSlider(),
+        ],
+      ),
+    );
+  }
 
   _getSmileButton() => Container(
         height: 320,
@@ -97,7 +103,7 @@ class _MainState extends State<Main> {
         child: RaisedButton(
           highlightElevation: 0,
           elevation: 0,
-          color: Colors.amberAccent,
+          color: mainColor,
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(160)),
           child: FlareActor(
@@ -110,19 +116,17 @@ class _MainState extends State<Main> {
 
   _getHintLabel() => Text(
       _isEnabled ? "Tap face to disable" : "Tap face to enable",
-      style:
-          TextStyle(color: Colors.black, fontFamily: 'Pacifico', fontSize: 20));
+      style: TextStyle(color: sideColor, fontFamily: 'Pacifico', fontSize: 20));
 
   _getCountSliderLabel() => Text("Notifcations per day",
-      style:
-          TextStyle(color: Colors.black, fontFamily: 'Pacifico', fontSize: 16));
+      style: TextStyle(color: sideColor, fontFamily: 'Pacifico', fontSize: 16));
 
   _getCountSlider() => Slider(
         value: _notificationCount,
         min: 1,
         max: 10,
         divisions: 9,
-        activeColor: Colors.black,
+        activeColor: sideColor,
         label: '${_notificationCount.round()}',
         onChanged: _isEnabled ? null : _setNotificationCount,
       );
