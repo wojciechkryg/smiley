@@ -22,16 +22,16 @@ class App extends StatelessWidget {
         title: 'Smiley',
         theme: ThemeData(
             accentTextTheme: TextTheme(body2: TextStyle(color: mainColor))),
-        home: Main(),
+        home: Home(),
       );
 }
 
-class Main extends StatefulWidget {
+class Home extends StatefulWidget {
   @override
-  createState() => _MainState();
+  createState() => _HomeState();
 }
 
-class _MainState extends State<Main> {
+class _HomeState extends State<Home> {
   final tagIsEnabled = 'isEnabled';
   final tagNotificationCount = 'notificationCount';
   var notifications = FlutterLocalNotificationsPlugin();
@@ -79,10 +79,10 @@ class _MainState extends State<Main> {
           ),
         ),
         backgroundColor: mainColor,
-        body: _getMainContainer(),
+        body: _getHomeContainer(),
       );
 
-  Container _getMainContainer() {
+  Container _getHomeContainer() {
     return Container(
       padding: EdgeInsets.all(16),
       child: Column(
