@@ -1,16 +1,33 @@
-# smiley
+# Smiley ![](/android/app/src/main/res/mipmap-mdpi/ic_launcher.png)
 
-A new Flutter project.
+The power of a smile is enormous, even if no one sees when we smile. People who smile can learn and work more efficiently. Also people who do not smile do not succeed. People response a smile for a smile. It costs nothing, but it gives a lot.
 
-## Getting Started
+> We don’t laugh because we’re happy, we’re happy because we laugh.
+>
+> &mdash; William James
 
-This project is a starting point for a Flutter application.
+If you feel that you are not able to smile right now, just force yourself to smile! Just as if you were already satisfied. Happiness depends only on ourselves. People are as happy as they think they are. It is worth to have a habit of smiling.
 
-A few resources to get you started if this is your first Flutter project:
+> There is nothing either good or bad, but thinking makes it so.
+>
+> &mdash; William Shakespeare
 
-- [Lab: Write your first Flutter app](https://flutter.io/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.io/docs/cookbook)
+## About
+Smiley was created for people, to make them remember about smile. Application is reminding about smiling each day, until the smile becomes part of you.
 
-For help getting started with Flutter, view our 
-[online documentation](https://flutter.io/docs), which offers tutorials, 
-samples, guidance on mobile development, and a full API reference.
+## License
+```
+ Copyright 2019 Wojciech Kryg
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+```
