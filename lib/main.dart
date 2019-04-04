@@ -18,7 +18,6 @@ final sideColor = Colors.black;
 class App extends StatelessWidget {
   @override
   build(BuildContext context) => MaterialApp(
-        debugShowCheckedModeBanner: false,
         title: 'Smiley',
         theme: ThemeData(
             accentTextTheme: TextTheme(body2: TextStyle(color: mainColor))),
