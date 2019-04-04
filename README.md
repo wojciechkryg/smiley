@@ -6,7 +6,7 @@ The power of a smile is enormous, even if no one sees when we smile. People who 
 >
 > &mdash; William James
 
-If you feel that you are not able to smile right now, just force yourself to smile! Just as if you were already satisfied. Happiness depends only on ourselves. People are as happy as they think they are. It is worth to have a habit of smiling.
+If you feel that you are not able to smile right now, just force yourself to smile! Just as if you were already satisfied. It will make you happier. Happiness depends only on ourselves. People are as happy as they think they are. It is worth to have a habit of smiling.
 
 > There is nothing either good or bad, but thinking makes it so.
 >
