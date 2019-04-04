@@ -82,20 +82,18 @@ class _HomeState extends State<Home> {
         body: _getHomeContainer(),
       );
 
-  Container _getHomeContainer() {
-    return Container(
-      padding: EdgeInsets.all(16),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          _getHintLabel(),
-          _getSmileButton(),
-          _getCountSliderLabel(),
-          _getCountSlider(),
-        ],
-      ),
-    );
-  }
+  _getHomeContainer() => Container(
+        padding: EdgeInsets.all(16),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            _getHintLabel(),
+            _getSmileButton(),
+            _getCountSliderLabel(),
+            _getCountSlider(),
+          ],
+        ),
+      );
 
   _getSmileButton() => Container(
         height: 320,
@@ -118,7 +116,7 @@ class _HomeState extends State<Home> {
       _isEnabled ? "Tap face to disable" : "Tap face to enable",
       style: TextStyle(color: sideColor, fontFamily: 'Pacifico', fontSize: 20));
 
-  _getCountSliderLabel() => Text("Notifcations per day",
+  _getCountSliderLabel() => Text("Reminders per day",
       style: TextStyle(color: sideColor, fontFamily: 'Pacifico', fontSize: 16));
 
   _getCountSlider() => Slider(
