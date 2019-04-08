@@ -15,6 +15,14 @@ If you feel that you are not able to smile right now, just force yourself to smi
 ## About
 Smiley was created for people, to make them remember about smile. Application is reminding about smiling each day, until the smile becomes part of you.
 
+## Flutter Create
+
+Application was made for Flutter Create contest using 5KB or less of Dart code. It's weight is 5067 bytes.
+
+## Screenshots
+
+<img src="/screenshots/01.png" width="280" height="591" alt="First screenshot"> <img src="/screenshots/02.png" width="280" height="591" alt="Second screenshot"> <img src="/screenshots/03.png" width="280" height="591" alt="Third screenshot">
+
 ## License
 ```
  Copyright 2019 Wojciech Kryg
