@@ -205,3 +205,4 @@ doc/api/
 !/packages/flutter_tools/test/data/dart_dependencies_test/**/.packages
 
 # End of https://www.gitignore.io/api/dart,flutter,androidstudio
+key.properties
