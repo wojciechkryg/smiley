@@ -21,7 +21,14 @@ Application was made for Flutter Create contest using 5KB or less of Dart code. 
 
 ## Screenshots
 
-<img src="/screenshots/01.png" width="280" height="591" alt="First screenshot"> <img src="/screenshots/02.png" width="280" height="591" alt="Second screenshot"> <img src="/screenshots/03.png" width="280" height="591" alt="Third screenshot">
+<p align="center">
+ <img src="/screenshots/01.png" width="280" height="498" alt="Beautiful design!">
+ <img src="/screenshots/02.png" width="280" height="498" alt="Adjust quantity!">
+</p>
+<p align="center">
+ <img src="/screenshots/03.png" width="280" height="498" alt="Remember to smile!">
+ <img src="/screenshots/04.png" width="280" height="498" alt="Funny emojis!">
+</p>
 
 ## License
 ```
