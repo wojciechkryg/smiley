@@ -13,7 +13,7 @@ If you feel that you are not able to smile right now, just force yourself to smi
 > &mdash; William Shakespeare
 
 ## About
-Smiley was created for people, to make them remember about smile. Application is reminding about smiling each day, until the smile becomes part of you.
+Smiley was created for people, to make them remember about smile. Application reminds about smiling each day, until the smile becomes part of you.
 
 ## Flutter Create
 
@@ -29,6 +29,14 @@ Application was made for Flutter Create contest using 5KB or less of Dart code. 
  <img src="/screenshots/03.png" width="280" height="498" alt="Remember to smile!">
  <img src="/screenshots/04.png" width="280" height="498" alt="Funny emojis!">
 </p>
+
+## Download
+
+[![Download from Google Play](screenshots/google_play_badge.png)](https://play.google.com/store/apps/details?id=com.wojdor.smiley)
+
+## Donate
+
+[![Donate with PayPal](screenshots/paypal_badge.png)](https://www.paypal.me/krygwojciech/)
 
 ## License
 ```
