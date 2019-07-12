@@ -1,5 +1,7 @@
 # Smiley ![](/android/app/src/main/res/mipmap-mdpi/ic_launcher.png)
 
+Smiley will remind you about smile at random time during the day. Just smile when you see the notification! 🙂
+
 The power of a smile is enormous, even if no one sees when we smile. People who smile can learn and work more efficiently. Also people who do not smile do not succeed. People response a smile for a smile. It costs nothing, but it gives a lot.
 
 > We don’t laugh because we’re happy, we’re happy because we laugh.
