@@ -36,10 +36,6 @@ Application was made for Flutter Create contest using 5KB or less of Dart code. 
 
 [![Download from Google Play](screenshots/google_play_badge.png)](https://play.google.com/store/apps/details?id=com.wojdor.smiley)
 
-## Donate
-
-[![Donate with PayPal](screenshots/paypal_badge.png)](https://www.paypal.me/krygwojciech/)
-
 ## License
 ```
  Copyright 2019 Wojciech Kryg
